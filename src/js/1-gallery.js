@@ -94,6 +94,9 @@ console.log(selectGallery);
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
-(function() {
-        let $gallery = new SimpleLightbox('.gallery a', {captionDelay: 250, captionsData: 'alt',});
-    })();
+let $gallery = new SimpleLightbox('.gallery a', {
+  caption: true,
+  captionDelay: 250,
+  captionsData: 'alt',
+});
+
