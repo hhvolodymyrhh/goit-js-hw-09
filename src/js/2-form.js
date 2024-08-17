@@ -49,7 +49,7 @@ function loadData(event) {
     
     localStorage.removeItem(localDataKey);
     
-// повна очистка сховища
+// повна очистка сховища якщо потрібно
 // localStorage.clear();
 }
 loadData();
