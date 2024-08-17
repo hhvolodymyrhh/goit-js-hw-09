@@ -47,7 +47,8 @@ function loadData(event) {
         listenerForm.elements.message.value = formData.message;
     }
     
-localStorage.removeItem(localDataKey);
+    localStorage.removeItem(localDataKey);
+    
 // повна очистка сховища
 // localStorage.clear();
 }
