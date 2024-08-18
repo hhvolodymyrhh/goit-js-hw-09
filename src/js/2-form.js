@@ -7,20 +7,18 @@ const formData = {
     message: "",
 };
 
-listenerForm.addEventListener("input", recordValue);
+const localDataKey = "feedback-form-state";
+
 //1. при вводі запис значень в formData без пробілів
  function recordValue(event) {
-    const email = listenerForm.elements.email.value;
-    const message = listenerForm.elements.message.value;
+    const email = listenerForm.elements.email.value.trim();
+    const message = listenerForm.elements.message.value.trim();
      
-     formData.email = email.trim();
-     formData.message = message.trim();
-     //2. видалення значень з локального сховища
-     if (email || message) {localStorage.removeItem(localDataKey);};
+     formData.email = email;
+     formData.message = message;
+//відправлення данних до сховища та приведення до рядка обєкту formData
+     localStorage.setItem(localDataKey, JSON.stringify(formData));
     }
-
-listenerForm.addEventListener("submit", eventSubmit);
-const localDataKey = "feedback-form-state";
 
 function eventSubmit(event) {
     //3. прибрати стандартну поведінку сабміту завантаження сторінки
@@ -28,19 +26,21 @@ function eventSubmit(event) {
 
     const email = listenerForm.elements.email.value.trim();
     const message = listenerForm.elements.message.value.trim();
-    //4. при путому рядку повернути повідомлення
+    //4. при пустому рядку повернути повідомлення
     if (email === "" || message === "") {
          return alert("Fill please all fields"); 
     } else {
-        //5. вівід в консоль обєкту відправлення данних у локальне сховище
+        //5. вивід в консоль обєкту відправлення данних у локальне сховище
         console.log(formData);
-        localStorage.setItem(localDataKey, JSON.stringify(formData));
+        
         //6. сброс значень форми
         listenerForm.reset();
+        //видалення значення локального сховища
+        localStorage.removeItem(localDataKey);
     };
 }
 
-function loadData(event) {
+function loadData() {
     //7. якщо локальне сховище не пусте
     if (localStorage.getItem(localDataKey) !== null) {
         //8. розпарсити перевід данних з JSON формату з сховища
@@ -50,11 +50,16 @@ function loadData(event) {
         //9. запис данних в formData
         listenerForm.elements.email.value = formData.email;
         listenerForm.elements.message.value = formData.message;
+        return;
     }
-    //10. очистка сховища
-    localStorage.removeItem(localDataKey);
-    
+    return;
+}
+
+loadData();
+listenerForm.addEventListener("input", recordValue);
+listenerForm.addEventListener("submit", eventSubmit);
+
+//10. очистка сховища
+// localStorage.removeItem(localDataKey); 
 // повна очистка сховища якщо потрібно
 // localStorage.clear();
-}
-loadData();
