@@ -65,9 +65,9 @@ const images = [
     description: 'Lighthouse Coast Sea',
   },
 ];
-
+//вибір елемента з DOM дерева
 const selectGallery = document.querySelector(".gallery");
-
+//створення всіх елементів поза DOM деревом для покращення роботи
 const x = images.map(image => {
   const liOfGallery = document.createElement("li");
   liOfGallery.classList.add("gallery-item");
@@ -75,10 +75,7 @@ const x = images.map(image => {
   aOfGallery.classList.add("gallery-link");
   aOfGallery.href = `${image.original}`;
   liOfGallery.appendChild(aOfGallery);
-//   можлива відміна дефолтної поведінки загрузки зображення
-  aOfGallery.addEventListener("click", function (event) {
-    event.preventDefault();
-  });
+//   можлива відміна дефолтної поведінки загрузки зображення непотрібна  
   const imgOfGallery = document.createElement("img")
   imgOfGallery.class = "gallery-image";
   imgOfGallery.src = `${image.preview}`;
