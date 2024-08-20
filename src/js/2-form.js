@@ -11,9 +11,9 @@ const localDataKey = "feedback-form-state";
 
 //1. при вводі запис значень в formData без пробілів
  function recordValue(event) {
-    const email = listenerForm.elements.email.value.trim();
-    const message = listenerForm.elements.message.value.trim();
-     
+    const email = event.currentTarget.elements.email.value.trim();
+    const message = event.currentTarget.elements.message.value.trim();
+     console.dir(formData)
      formData.email = email;
      formData.message = message;
 //відправлення данних до сховища та приведення до рядка обєкту formData
@@ -23,9 +23,9 @@ const localDataKey = "feedback-form-state";
 function eventSubmit(event) {
     //3. прибрати стандартну поведінку сабміту завантаження сторінки
     event.preventDefault();
-
-    const email = listenerForm.elements.email.value.trim();
-    const message = listenerForm.elements.message.value.trim();
+//при події на поточному елементі записати значення у змінну без пробілів на початку та кінці
+    const email = event.currentTarget.elements.email.value.trim();
+    const message = event.currentTarget.elements.message.value.trim();
     //4. при пустому рядку повернути повідомлення
     if (email === "" || message === "") {
          return alert("Fill please all fields"); 
