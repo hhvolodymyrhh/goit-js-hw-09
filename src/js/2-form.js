@@ -43,14 +43,20 @@ function eventSubmit(event) {
 function loadData() {
     //7. якщо локальне сховище не пусте
     if (localStorage.getItem(localDataKey) !== null) {
-        //8. розпарсити перевід данних з JSON формату з сховища
-        const formDataNev = JSON.parse(localStorage.getItem(localDataKey));
-        formData.email = formDataNev.email;
-        formData.message = formDataNev.message;
-        //9. запис данних в formData
-        listenerForm.elements.email.value = formData.email;
-        listenerForm.elements.message.value = formData.message;
-        return;
+        //вивід помилки при невдалому парсингу try/catch
+        try {
+            //8. розпарсити перевід данних з JSON формату з сховища
+            const formDataNev = JSON.parse(localStorage.getItem(localDataKey));
+            formData.email = formDataNev.email;
+            formData.message = formDataNev.message;
+            //9. запис данних в formData
+            listenerForm.elements.email.value = formData.email;
+            listenerForm.elements.message.value = formData.message;
+            return;
+        } catch (error) {
+            console.log(error.name);
+            console.log(error.message);
+        }
     }
     return;
 }
