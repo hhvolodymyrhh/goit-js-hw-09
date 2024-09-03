@@ -1,5 +1,8 @@
 "use strict";
 
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
+
 const images = [
   {
     preview:
@@ -87,9 +90,6 @@ return liOfGallery
 selectGallery.append(...x);
 // консоль для перевірки
 console.log(selectGallery);
-
-import SimpleLightbox from "simplelightbox";
-import "simplelightbox/dist/simple-lightbox.min.css";
 
 let $gallery = new SimpleLightbox('.gallery a', {
   caption: true,
